@@ -1,1 +1,223 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>шэо-Конструктор питания</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f5f2eb;color:#283b30;
+font-family:Arial,sans-serif}
+header{background:#244839;color:white;padding:25px 18px}
+header h1{font-size:25px;margin:5px 0}
+header small{color:#cde0d1}
+main{max-width:650px;margin:auto;padding:16px}
+section{background:white;border-radius:15px;
+padding:17px;margin-bottom:15px;box-shadow:0 2px 9px #0000000a}
+h2{font-size:19px;margin:0 0 14px}
+label{display:block;margin:10px 0 5px;font-size:14px}
+input,select,button{font:inherit;border-radius:9px;padding:12px}
+input,select{width:100%;border:1px solid #b6c4b9;
+background:white;color:#25372d}
+button{border:0;background:#27654b;color:white;
+font-weight:bold;cursor:pointer}
+button.secondary{background:#e3ede6;color:#245039}
+button.remove{background:#f4e5e1;color:#9d3f30;padding:8px}
+.grid{display:grid;grid-template-columns:1fr 110px;gap:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);
+gap:8px;text-align:center}
+.stat{background:#edf4ee;padding:14px 5px;border-radius:10px}
+.stat b{display:block;font-size:23px;margin-top:5px}
+.bar{height:12px;background:#d9e4dc;border-radius:9px;
+overflow:hidden;margin:15px 0}
+#progress{height:100%;background:#63a17b;width:0%}
+.entry{display:flex;justify-content:space-between;
+align-items:center;gap:8px;padding:12px 0;
+border-bottom:1px solid #eee}
+.entry strong{display:block}
+.entry small{display:block;color:#66756c;margin-top:4px}
+.note{font-size:12px;color:#748077;line-height:1.5}
+footer{text-align:center;padding:18px;color:#607668}
+</style>
+</head>
+<body>
+<header>
+  <small>🌿 ШКОЛА ЭКОЛОГИЧНЫХ ОТНОШЕНИЙ</small>
+  <h1>шэо-Конструктор питания</h1>
+  <small>Твой рацион — твой выбор · ©V</small>
+</header>
+<main>
+<section>
+  <h2>Цель на день</h2>
+  <label for="target">Белок, граммов</label>
+  <input id="target" type="number" min="1" value="65">
+  <div class="bar"><div id="progress"></div></div>
+  <div id="remaining"></div>
+</section>
+
+<section>
+  <h2>Добавить продукт</h2>
+  <label for="product">Выбери продукт</label>
+  <select id="product"></select>
+  <label for="grams">Количество, г</label>
+  <input id="grams" type="number" min="1" value="100">
+  <button style="width:100%;margin-top:13px"
+          onclick="addFood()">+ Добавить</button>
+</section>
+
+<section>
+  <h2>Мой рацион</h2>
+  <div class="stats">
+    <div class="stat">Белки<b id="protein">0</b>г</div>
+    <div class="stat">Калории<b id="calories">0</b>ккал</div>
+    <div class="stat">Продуктов<b id="count">0</b></div>
+  </div>
+  <div id="entries"></div>
+  <button class="secondary" onclick="clearDay()"
+          style="margin-top:15px;width:100%">
+    Очистить рацион
+  </button>
+</section>
+<p class="note">Показатели ориентировочные. Для точного расчёта
+проверяй состав на упаковке. Данные сохраняются в браузере
+этого устройства.</p>
+</main>
+<footer>🌿 шэо · ©V</footer>
+
+<script>
+const foods = [
+["Мясо нежирное, готовое",27,165],
+["Птица, готовая",28,150],
+["Рыба, готовая",22,130],
+["Морепродукты",19,100],
+["Печень и субпродукты",20,140],
+["Рыбные консервы",23,150],
+["Яйцо",13,155],
+["Творог 0,1%",18,75],
+["Творог 2%",17,100],
+["Творог 5%",17,121],
+["Сыр твёрдый",25,350],
+["Сыр мягкий",15,260],
+["Греческий йогурт",9,75],
+["Йогурт обычный",4,65],
+["Молоко",3.2,55],
+["Кефир",3,50],
+["Сметана 15%",2.6,160],
+["Соя варёная",17,170],
+["Тофу",12,130],
+["Темпе",19,195],
+["Чечевица варёная",9,115],
+["Фасоль варёная",8,120],
+["Нут варёный",9,165],
+["Горох варёный",6,85],
+["Сейтан",23,130],
+["Овсянка сухая",13,370],
+["Гречка варёная",4,110],
+["Макароны варёные",4.5,136],
+["Рис варёный",2.7,130],
+["Картофель отварной",2,82],
+["Хлеб",8,260],
+["Орехи",20,600],
+["Семечки",22,580],
+["Арахисовая паста",25,600],
+["Протеиновый порошок",75,390]
+];
+
+const $ = id => document.getElementById(id);
+const storeKey = "sheo-nutrition-v1";
+
+let items = [];
+try {
+  items = JSON.parse(localStorage.getItem(storeKey)) || [];
+  if (!Array.isArray(items)) items = [];
+} catch(e) { items = []; }
+
+const selector = $("product");
+foods.forEach((f,i) => {
+  const option = document.createElement("option");
+  option.value = i;
+  option.textContent = f[0];
+  selector.appendChild(option);
+});
+
+const savedTarget = localStorage.getItem(storeKey+"-target");
+if (savedTarget) $("target").value = savedTarget;
+
+function save() {
+  localStorage.setItem(storeKey,JSON.stringify(items));
+}
+function addFood() {
+  const grams = Number($("grams").value);
+  const index = Number(selector.value);
+  if (!Number.isFinite(grams) || grams <= 0 || grams > 10000) {
+    alert("Укажи количество продукта в граммах");
+    return;
+  }
+  items.push({index,grams});
+  save();
+  render();
+}
+function removeFood(i) {
+  items.splice(i,1);
+  save();
+  render();
+}
+function clearDay() {
+  if (items.length && confirm("Очистить весь рацион?")) {
+    items=[];
+    save();
+    render();
+  }
+}
+function render() {
+  let protein=0,calories=0;
+  const container=$("entries");
+  container.replaceChildren();
+
+  items.forEach((item,i) => {
+    const food=foods[item.index];
+    if (!food) return;
+    const p=food[1]*item.grams/100;
+    const c=food[2]*item.grams/100;
+    protein+=p;
+    calories+=c;
+
+    const row=document.createElement("div");
+    row.className="entry";
+
+    const details=document.createElement("div");
+    const name=document.createElement("strong");
+    name.textContent=food[0]+" — "+item.grams+" г";
+    const summary=document.createElement("small");
+    summary.textContent=p.toFixed(1)+" г белка · "+
+                        Math.round(c)+" ккал";
+    details.append(name,summary);
+
+    const button=document.createElement("button");
+    button.className="remove";
+    button.textContent="×";
+    button.setAttribute("aria-label","Удалить продукт");
+    button.onclick=()=>removeFood(i);
+    row.append(details,button);
+    container.appendChild(row);
+  });
+
+  $("protein").textContent=protein.toFixed(1);
+  $("calories").textContent=Math.round(calories);
+  $("count").textContent=items.length;
+
+  const target=Math.max(1,Number($("target").value)||65);
+  $("progress").style.width=Math.min(100,protein/target*100)+"%";
+  $("remaining").textContent=protein>=target
+    ? "Цель по белку достигнута"
+    : "Осталось "+(target-protein).toFixed(1)+" г белка";
+}
+$("target").addEventListener("input",()=>{
+  localStorage.setItem(storeKey+"-target",$("target").value);
+  render();
+});
+render();
+</script>
+</body>
+</html>
