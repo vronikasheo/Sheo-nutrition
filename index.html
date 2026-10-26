@@ -3,216 +3,72 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>шэо-Конструктор питания</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  background: #f5f2eb;
-  color: #283b30;
-  font-family: Arial, sans-serif;
-}
-
-header {
-  background: #244839;
-  color: white;
-  padding: 25px 18px;
-}
-
-header h1 {
-  font-size: 25px;
-  margin: 5px 0;
-}
-
-header small { color: #cde0d1; }
-
-main {
-  max-width: 650px;
-  margin: auto;
-  padding: 16px;
-}
-
-section {
-  background: white;
-  border-radius: 15px;
-  padding: 17px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 9px #0000000a;
-}
-
-h2 {
-  font-size: 19px;
-  margin: 0 0 14px;
-}
-
-label {
-  display: block;
-  margin: 10px 0 5px;
-  font-size: 14px;
-}
-
-input, select, button {
-  font: inherit;
-  border-radius: 9px;
-  padding: 12px;
-}
-
-input, select {
-  width: 100%;
-  border: 1px solid #b6c4b9;
-  background: white;
-  color: #25372d;
-}
-
-button {
-  border: 0;
-  background: #27654b;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button.secondary {
-  background: #e3ede6;
-  color: #245039;
-}
-
-button.remove {
-  background: #f4e5e1;
-  color: #9d3f30;
-  padding: 8px;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  text-align: center;
-}
-
-.stat {
-  background: #edf4ee;
-  padding: 12px 5px;
-  border-radius: 10px;
-  font-size: 13px;
-}
-
-.stat b {
-  display: block;
-  font-size: 22px;
-  margin-top: 5px;
-}
-
-.protein-card {
-  background: #244839;
-  color: white;
-  padding: 20px;
-  border-radius: 13px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.protein-card b {
-  display: block;
-  font-size: 42px;
-  margin: 6px 0;
-  font-weight: 800;
-}
-
-.protein-card small { color: #d4e9db; }
-
-.bar {
-  height: 12px;
-  background: #d9e4dc;
-  border-radius: 9px;
-  overflow: hidden;
-  margin: 15px 0;
-}
-
-#progress {
-  height: 100%;
-  background: #63a17b;
-  width: 0%;
-  transition: width .2s;
-}
-
-.entry {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.entry strong { display: block; }
-
-.entry small {
-  display: block;
-  color: #66756c;
-  margin-top: 5px;
-  line-height: 1.6;
-}
-
-.entry .p {
-  font-weight: 800;
-  color: #205d40;
-}
-
-.note {
-  font-size: 12px;
-  color: #748077;
-  line-height: 1.5;
-}
-
-footer {
-  text-align: center;
-  padding: 18px;
-  color: #607668;
-}
+*{box-sizing:border-box}
+body{margin:0;background:#f5f2eb;color:#283b30;font-family:Arial,sans-serif}
+header{background:#244839;color:white;padding:25px 18px}
+header h1{font-size:25px;margin:7px 0}
+header small{color:#cde0d1;line-height:1.5}
+main{max-width:650px;margin:auto;padding:16px}
+section{background:#fff;border-radius:15px;padding:17px;margin-bottom:15px;box-shadow:0 2px 9px #0000000a}
+h2{font-size:19px;margin:0 0 14px}
+label{display:block;margin:10px 0 5px;font-size:14px}
+input,select,button{font:inherit;border-radius:9px;padding:12px}
+input,select{width:100%;border:1px solid #b6c4b9;background:white;color:#25372d}
+button{border:0;background:#27654b;color:#fff;font-weight:bold;cursor:pointer}
+button.secondary{background:#e3ede6;color:#245039}
+button.remove{background:#f4e5e1;color:#9d3f30;padding:8px}
+.protein-card{background:#244839;color:#fff;padding:20px;border-radius:13px;text-align:center;margin-bottom:10px}
+.protein-card b{display:block;font-size:42px;margin:6px 0;font-weight:800}
+.protein-card small{color:#d4e9db}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stat{background:#edf4ee;padding:12px 5px;border-radius:10px;font-size:12px}
+.stat b{display:block;font-size:21px;margin:5px 0 2px}
+.bar{height:12px;background:#d9e4dc;border-radius:9px;overflow:hidden;margin:15px 0}
+#progress{height:100%;background:#63a17b;width:0%;transition:width .2s}
+.entry{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid #eee}
+.entry strong{display:block}
+.entry small{display:block;color:#66756c;margin-top:5px;line-height:1.6}
+.entry .p{font-weight:800;color:#205d40}
+.note{font-size:12px;color:#748077;line-height:1.5}
+.unit-note{font-size:12px;color:#607668;margin-top:6px}
+footer{text-align:center;padding:18px;color:#607668}
 </style>
 </head>
-
 <body>
 
 <header>
   <small>🌿 ШКОЛА ЭКОЛОГИЧНЫХ ОТНОШЕНИЙ</small>
   <h1>шэо-Конструктор питания</h1>
-  <small>
-    Твоя диета — твой вкус и выбор.
-    А нудные расчёты сделает шэо-Конструктор. ©V
-  </small>
+  <small>Твоя диета — твой вкус и выбор.<br>
+  А нудные расчёты сделает шэо-Конструктор. ©V</small>
 </header>
 
 <main>
 
 <section>
   <h2>Цель по белку</h2>
-
   <label for="target">Белок в день, г</label>
   <input id="target" type="number" min="1" value="65">
-
-  <div class="bar">
-    <div id="progress"></div>
-  </div>
-
+  <div class="bar"><div id="progress"></div></div>
   <div id="remaining"></div>
 </section>
 
 <section>
-  <h2>Добавить продукт</h2>
-
-  <label for="product">Продукт</label>
+  <h2>Добавить продукт или блюдо</h2>
+  <label for="product">Выбери из каталога</label>
   <select id="product"></select>
 
-  <label for="grams">Количество, г</label>
-  <input id="grams" type="number" min="1" value="100">
+  <label for="grams" id="amountLabel">Количество, г</label>
+  <input id="grams" type="number" min="1" step="any" value="100">
 
-  <button
-    style="width:100%;margin-top:13px"
-    onclick="addFood()">
+  <div class="unit-note" id="unitNote">
+    Продукты рассчитываются по весу.
+  </div>
+
+  <button style="width:100%;margin-top:13px" onclick="addFood()">
     + Добавить в рацион
   </button>
 </section>
@@ -227,39 +83,23 @@ footer {
   </div>
 
   <div class="stats">
-    <div class="stat">
-      Жиры
-      <b id="fat">0</b>
-      г
-    </div>
-
-    <div class="stat">
-      Углеводы
-      <b id="carbs">0</b>
-      г
-    </div>
-
-    <div class="stat">
-      Калории
-      <b id="calories">0</b>
-      ккал
-    </div>
+    <div class="stat">Жиры<b id="fat">0</b>г</div>
+    <div class="stat">Углеводы<b id="carbs">0</b>г</div>
+    <div class="stat">Калории<b id="calories">0</b>ккал</div>
   </div>
 
   <div id="entries"></div>
 
-  <button
-    class="secondary"
-    onclick="clearDay()"
-    style="margin-top:15px;width:100%">
+  <button class="secondary" onclick="clearDay()"
+          style="margin-top:15px;width:100%">
     Очистить рацион
   </button>
 </section>
 
 <p class="note">
-  Показатели БЖУ ориентировочные.
-  Для продуктов с упаковкой используй данные этикетки.
-  Порции сохраняются в браузере этого устройства.
+  Значения БЖУ могут колебаться 1-3 ед.
+  Для упакованных продуктов сверяй их с этикеткой.
+  Данные рациона сохраняются в браузере этого устройства.
 </p>
 
 </main>
@@ -267,18 +107,23 @@ footer {
 <footer>🌿 шэо · ©V</footer>
 
 <script>
+/*
+Формат:
+["Название", белки, калории, жиры, углеводы]
 
-// Формат записи продукта:
-// ["Название", белки, калории, жиры, углеводы]
-//
-// Все показатели указаны на 100 г.
-//
-// ВАЖНО:
-// Старые продукты не переставлять местами.
-// Новые строки добавлять в конец списка.
-// Так сохраняется совместимость с прежним рационом.
+Для готовых завтраков:
+["Название", белки, калории, жиры, углеводы, "portion"]
+
+Обычные продукты: все значения на 100 г.
+Завтраки с "portion": все значения на одну порцию.
+
+НЕ МЕНЯЙ порядок старых продуктов:
+сохранённый рацион использует их индексы.
+*/
 
 const foods = [
+
+  // ОСНОВНОЙ КАТАЛОГ — прежние продукты
   ["Мясо нежирное, готовое",27,165,6,0],
   ["Птица, готовая",28,150,4,0],
   ["Рыба, готовая",22,130,4.5,0],
@@ -313,151 +158,198 @@ const foods = [
   ["Орехи",20,600,53,20],
   ["Семечки",22,580,50,20],
   ["Арахисовая паста",25,600,50,20],
-  ["Протеиновый порошок",75,390,6,9], 
-["Картофель жареный",2,160,6.7,22.7],
-["Картофельная запеканка с фаршем",8.7,173.3,10,12],
-["Спагетти с маслом",4.7,142.7,3.3,28.7],
-["Брокколи отварная",2.7,34.7,0.7,5.3],
-["Цветная капуста отварная",2,33.3,0,4.7],
-["Свёкла отварная",1.3,43.3,0,10],
-["Капуста тушёная",1.3,36.7,0,7.3],
-["Баклажаны в томатном соусе",1.3,37.3,0,8],
-["Мама на даче — овощное рагу ©V",1.3,69.3,4.7,6.7],
-["Брюре — овощной гарнир ©V",1.3,48.7,0,11.3],
-["Булгур с маслом",3.3,148,3.3,26.7],
-["Маринкины пластинки ©V",5.3,114.7,6.7,8.7],
-["Рис отварной с маслом",2.6,150,2.9,27.1],
-["Картофель запечённый дольками",2,120,2.7,21.3],
-["Драники со сметаной",3.5,125,5,15.5],
-["Картопни со сметаной ©V",3.3,126.7,3,17.3],
-["Картофельные крокеты",4,190,7,26],
+  ["Протеиновый порошок",75,390,6,9],
+
+  // ГАРНИРЫ — добавленные ранее
+  ["Картофель жареный",2,160,6.7,22.7],
+  ["Картофельная запеканка с фаршем",8.7,173.3,10,12],
+  ["Спагетти с маслом",4.7,142.7,3.3,28.7],
+  ["Брокколи отварная",2.7,34.7,0.7,5.3],
+  ["Цветная капуста отварная",2,33.3,0,4.7],
+  ["Свёкла отварная",1.3,43.3,0,10],
+  ["Капуста тушёная",1.3,36.7,0,7.3],
+  ["Баклажаны в томатном соусе",1.3,37.3,0,8],
+  ["Мама на даче — овощное рагу ©V",1.3,69.3,4.7,6.7],
+  ["Брюре — овощной гарнир ©V",1.3,48.7,0,11.3],
+  ["Булгур с маслом",3.3,148,3.3,26.7],
+  ["Маринкины пластинки ©V",5.3,114.7,6.7,8.7],
+  ["Рис отварной с маслом",2.6,150,2.9,27.1],
+  ["Картофель запечённый дольками",2,120,2.7,21.3],
+  ["Драники со сметаной",3.5,125,5,15.5],
+  ["Картопни со сметаной ©V",3.3,126.7,3,17.3],
+  ["Картофельные крокеты",4,190,7,26],
+
+  // ЗАВТРАКИ — показатели на ОДНУ ПОРЦИЮ
+  ["Завтрак ~250 — Сливочные сэндвичи ©V (2 шт.)",8,250,9,38,"portion"],
+  ["Завтрак ~250 — Омлет моей бабушки ©V",15,245,15,12,"portion"],
+  ["Завтрак ~250 — Яйцо пашот с багетом",10,250,11,20,"portion"],
+  ["Завтрак ~250 — Мамалыга с маслом",5,250,9,37,"portion"],
+  ["Завтрак ~250 — Пшённая каша на молоке",8,250,6,40,"portion"],
+  ["Завтрак ~250 — Белковая запеканка",28,250,9,16,"portion"],
+  ["Завтрак ~250 — Творожные вафли",18,250,10,20,"portion"],
+  ["Завтрак ~250 — Сырники",17,246,11,21,"portion"],
+  ["Завтрак ~250 — Папанаши",15,249,10,24,"portion"],
+  ["Бутерброд Мастера ©V",11,167,8,17,"portion"],
+  ["Шэо-омлет ©V",15,88,1,2,"portion"],
+  ["Завтрак ~250 — Глазунья с овощами",14,248,18,7,"portion"],
+  ["Творог с ягодами",18,225,12,10,"portion"],
+  ["Завтрак ~250 — Сэндвич с индейкой",18,248,8,24,"portion"],
+  ["Завтрак ~250 — Овсяная каша с ягодами",9,249,7,36,"portion"],
+  ["Сэндвич с тунцом",19,218,3,29,"portion"],
+  ["Завтрак ~250 — Панкейки",9,248,8,31,"portion"],
+  ["Завтрак ~250 — Блины",10,244,9,28,"portion"],
+  ["Завтрак ~250 — Оладьи с яблоком",8,248,8,36,"portion"],
+  ["Завтрак ~250 — Оладьи классические",9,245,8,34,"portion"],
+  ["Завтрак ~250 — Вареники",10,248,5,38,"portion"],
+  ["Завтрак ~250 — Запечённая тортилья",16,247,11,18,"portion"],
+  ["Завтрак ~250 — Фриттата",17,248,17,7,"portion"],
+  ["Творожная запеканка ©V",11,210,8,22,"portion"],
+  ["Шоколадные вафли с изюмом ©V (2 шт.)",5.2,236,8,36.6,"portion"],
+  ["Молочные гренки от мамы",10,390,16,50,"portion"],
+  ["Школьные гренки",5,300,10,46,"portion"],
+  ["Ленивые вареники с малиновым вареньем",31,438,16,49,"portion"]
+
 ];
 
 const $ = id => document.getElementById(id);
-
-// Тот же ключ, что в первоначальной версии.
-// Ранее записанные порции сохраняются.
-
 const storeKey = "sheo-nutrition-v1";
 
 let items = [];
 
 try {
-  items = JSON.parse(
-    localStorage.getItem(storeKey)
-  ) || [];
-
-  if (!Array.isArray(items)) {
-    items = [];
-  }
-
+  items = JSON.parse(localStorage.getItem(storeKey)) || [];
+  if (!Array.isArray(items)) items = [];
 } catch(e) {
   items = [];
 }
 
-// Заполняем выпадающий список продуктов.
-
 const selector = $("product");
 
-foods.forEach((food, index) => {
+foods.forEach((food,index) => {
   const option = document.createElement("option");
-
   option.value = index;
   option.textContent = food[0];
-
   selector.appendChild(option);
 });
 
-// Восстанавливаем дневную цель.
-
-const savedTarget = localStorage.getItem(
-  storeKey + "-target"
-);
-
-if (savedTarget) {
-  $("target").value = savedTarget;
+function isPortion(index) {
+  return foods[index] && foods[index][5] === "portion";
 }
 
-// Сохранение рациона.
+function updateUnit() {
+  const portion = isPortion(Number(selector.value));
+
+  $("amountLabel").textContent =
+    portion ? "Количество, порций" : "Количество, г";
+
+  $("grams").value = portion ? 1 : 100;
+  $("grams").step = portion ? 1 : "any";
+  $("grams").min = portion ? 1 : 0.1;
+
+  $("unitNote").textContent = portion
+    ? "Одна порция — готовый завтрак из Книги Буратино."
+    : "Продукт рассчитывается по весу в граммах.";
+}
+
+selector.addEventListener("change",updateUnit);
+updateUnit();
+
+const savedTarget =
+  localStorage.getItem(storeKey+"-target");
+
+if (savedTarget) $("target").value = savedTarget;
 
 function save() {
-  localStorage.setItem(
-    storeKey,
-    JSON.stringify(items)
-  );
+  localStorage.setItem(storeKey,JSON.stringify(items));
 }
 
-// Добавление продукта.
-
 function addFood() {
-  const grams = Number($("grams").value);
+  const amount = Number($("grams").value);
   const index = Number(selector.value);
+  const portion = isPortion(index);
 
-  if (
-    !Number.isFinite(grams) ||
-    grams <= 0 ||
-    grams > 10000
-  ) {
-    alert("Укажи количество продукта в граммах");
+  if (!Number.isFinite(amount) || amount <= 0 || amount > 10000) {
+    alert("Укажи количество");
     return;
   }
 
-  items.push({index, grams});
+  if (portion && !Number.isInteger(amount)) {
+    alert("Для готового завтрака укажи целое число порций");
+    return;
+  }
+
+  // Сохраняем новый формат отдельно от старого:
+  // прежние записи {index, grams} продолжат работать.
+  if (portion) {
+    items.push({index, quantity:amount, unit:"portion"});
+  } else {
+    items.push({index, grams:amount});
+  }
 
   save();
   render();
 }
-
-// Удаление одной позиции.
 
 function removeFood(index) {
-  items.splice(index, 1);
-
+  items.splice(index,1);
   save();
   render();
 }
 
-// Очистка дневного рациона.
-
 function clearDay() {
-  if (
-    items.length &&
-    confirm("Очистить весь рацион?")
-  ) {
+  if (items.length && confirm("Очистить весь рацион?")) {
     items = [];
-
     save();
     render();
   }
 }
 
-// Подсчёт калорий и полного БЖУ.
-
 function render() {
-  let protein = 0;
-  let fat = 0;
-  let carbs = 0;
-  let calories = 0;
+  let protein=0;
+  let fat=0;
+  let carbs=0;
+  let calories=0;
 
   const container = $("entries");
   container.replaceChildren();
 
-  items.forEach((item, index) => {
+  items.forEach((item,index) => {
     const food = foods[item.index];
-
     if (!food) return;
 
-    const ratio = item.grams / 100;
+    const portion =
+      item.unit === "portion" ||
+      (item.unit === undefined && isPortion(item.index));
 
-    const p = food[1] * ratio;
-    const k = food[2] * ratio;
-    const f = food[3] * ratio;
-    const c = food[4] * ratio;
+    let ratio;
+    let quantityText;
 
-    protein += p;
-    calories += k;
-    fat += f;
-    carbs += c;
+    if (portion) {
+      // Для новых записей — количество порций.
+      // Для старого формата с граммами — совместимость.
+      const amount = item.unit === "portion"
+        ? Number(item.quantity)
+        : Number(item.grams)/100;
+
+      ratio = amount;
+      quantityText = amount+" порц.";
+    } else {
+      const grams = Number(item.grams);
+      ratio = grams/100;
+      quantityText = grams+" г";
+    }
+
+    if (!Number.isFinite(ratio) || ratio <= 0) return;
+
+    const p = food[1]*ratio;
+    const k = food[2]*ratio;
+    const f = food[3]*ratio;
+    const c = food[4]*ratio;
+
+    protein+=p;
+    calories+=k;
+    fat+=f;
+    carbs+=c;
 
     const row = document.createElement("div");
     row.className = "entry";
@@ -465,87 +357,58 @@ function render() {
     const details = document.createElement("div");
 
     const name = document.createElement("strong");
-    name.textContent =
-      food[0] + " — " + item.grams + " г";
+    name.textContent = food[0]+" — "+quantityText;
 
     const summary = document.createElement("small");
+    const boldProtein = document.createElement("span");
+    boldProtein.className = "p";
+    boldProtein.textContent = "Б "+p.toFixed(1)+" г";
 
-    const proteinLabel = document.createElement("span");
-    proteinLabel.className = "p";
+    summary.appendChild(boldProtein);
+    summary.appendChild(document.createTextNode(
+      " · Ж "+f.toFixed(1)+" г"+
+      " · У "+c.toFixed(1)+" г"+
+      " · "+Math.round(k)+" ккал"
+    ));
 
-    proteinLabel.textContent =
-      "Б " + p.toFixed(1) + " г";
-
-    summary.appendChild(proteinLabel);
-
-    summary.appendChild(
-      document.createTextNode(
-        " · Ж " + f.toFixed(1) + " г" +
-        " · У " + c.toFixed(1) + " г" +
-        " · " + Math.round(k) + " ккал"
-      )
-    );
-
-    details.append(name, summary);
+    details.append(name,summary);
 
     const button = document.createElement("button");
-
     button.className = "remove";
     button.textContent = "×";
-
-    button.setAttribute(
-      "aria-label",
-      "Удалить продукт"
-    );
-
+    button.setAttribute("aria-label","Удалить продукт");
     button.onclick = () => removeFood(index);
 
-    row.append(details, button);
+    row.append(details,button);
     container.appendChild(row);
   });
 
-  $("protein").textContent =
-    protein.toFixed(1) + " г";
-
+  $("protein").textContent = protein.toFixed(1)+" г";
   $("fat").textContent = fat.toFixed(1);
   $("carbs").textContent = carbs.toFixed(1);
+  $("calories").textContent = Math.round(calories);
 
-  $("calories").textContent =
-    Math.round(calories);
-
-  // Индикатор достижения цели по белку.
-
-  const target = Math.max(
-    1,
-    Number($("target").value) || 65
-  );
+  const target =
+    Math.max(1,Number($("target").value)||65);
 
   $("progress").style.width =
-    Math.min(100, protein / target * 100) + "%";
+    Math.min(100,protein/target*100)+"%";
 
-  $("remaining").textContent =
-    protein >= target
-      ? "Цель по белку достигнута"
-      : "До цели осталось " +
-        (target - protein).toFixed(1) +
-        " г белка";
+  $("remaining").textContent = protein>=target
+    ? "Цель по белку достигнута"
+    : "До цели осталось "+
+      (target-protein).toFixed(1)+" г белка";
 }
 
-// Сохранение изменения цели.
-
-$("target").addEventListener("input", () => {
+$("target").addEventListener("input",() => {
   localStorage.setItem(
-    storeKey + "-target",
+    storeKey+"-target",
     $("target").value
   );
-
   render();
 });
 
-// Первый запуск.
-
 render();
-
 </script>
 </body>
 </html>
