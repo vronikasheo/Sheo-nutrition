@@ -457,5 +457,47 @@ $("target").addEventListener("input",() => {
 
 render();
 </script>
+  
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const select = [...document.querySelectorAll("select")]
+    .find(s => [...s.options].some(o =>
+      o.textContent.includes("Свинина, вырезка")
+    ));
+
+  if (!select) return;
+  const search = document.createElement("input");
+  search.type = "search";
+  search.placeholder = "🔎 Найти продукт...";
+  search.style.cssText =
+    "width:100%;box-sizing:border-box;padding:12px;" +
+    "margin:8px 0;border:1px solid #aaa;" +
+    "border-radius:10px;font-size:16px;";
+
+  select.parentNode.insertBefore(search, select);
+
+  const original = [...select.options].map(o => o.cloneNode(true));
+
+  search.addEventListener("input", function () {
+    const query = search.value.toLowerCase().trim();
+    const currentValue = select.value;
+
+    select.replaceChildren();
+
+    original.forEach(option => {
+      if (!query ||
+          option.textContent.toLowerCase().includes(query)) {
+        select.appendChild(option.cloneNode(true));
+      }
+    });
+
+    if ([...select.options].some(o => o.value === currentValue)) {
+      select.value = currentValue;
+    } else {
+      select.selectedIndex = -1;
+    }
+  });
+});
+</script>
 </body>
 </html>
