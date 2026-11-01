@@ -500,13 +500,34 @@ render();
 </script>
   
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const select = [...document.querySelectorAll("select")]
-    .find(s => [...s.options].some(o =>
-      o.textContent.includes("Свинина, вырезка")
-    ));
 
-  if (!select) return;
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const select = document.getElementById("product");
+  const category = document.getElementById("category");
+
+  if (!select || !category) return;
+
+  const original = [...select.options].map(option =>
+    option.cloneNode(true)
+  );
+
+  // Находим границы завтраков по названиям,
+  // а не по номерам строк редактора.
+  const first = original.find(option =>
+    option.textContent.includes("Сливочные сэндвичи")
+  );
+
+  const last = original.find(option =>
+    option.textContent.includes(
+      "Ленивые вареники с малиновым вареньем"
+    )
+  );
+
+  const breakfastStart = first ? Number(first.value) : -1;
+  const breakfastEnd = last ? Number(last.value) : -1;
+
+  // Создаём поле поиска.
   const search = document.createElement("input");
   search.type = "search";
   search.placeholder = "🔎 Найти продукт...";
@@ -517,28 +538,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
   select.parentNode.insertBefore(search, select);
 
-  const original = [...select.options].map(o => o.cloneNode(true));
-
-  search.addEventListener("input", function () {
+  function filterProducts() {
     const query = search.value.toLowerCase().trim();
-    const currentValue = select.value;
+    const chosen = category.value;
+    const previous = select.value;
 
     select.replaceChildren();
 
     original.forEach(option => {
-      if (!query ||
-          option.textContent.toLowerCase().includes(query)) {
+      const index = Number(option.value);
+      const name = option.textContent.toLowerCase();
+
+      const inBreakfasts =
+        breakfastStart >= 0 &&
+        breakfastEnd >= breakfastStart &&
+        index >= breakfastStart &&
+        index <= breakfastEnd;
+
+      const matchesCategory =
+        chosen === "all" ||
+        (chosen === "breakfast" && inBreakfasts);
+
+      const matchesSearch = name.includes(query);
+
+      if (matchesCategory && matchesSearch) {
         select.appendChild(option.cloneNode(true));
       }
     });
 
-    if ([...select.options].some(o => o.value === currentValue)) {
-      select.value = currentValue;
-    } else {
-      select.selectedIndex = -1;
+    if ([...select.options].some(
+      option => option.value === previous
+    )) {
+      select.value = previous;
+    } else if (select.options.length) {
+      select.selectedIndex = 0;
     }
-  });
+
+    // Обновляем единицу измерения:
+    // граммы или порции.
+    select.dispatchEvent(new Event("change"));
+  }
+
+  category.addEventListener("change", filterProducts);
+  search.addEventListener("input", filterProducts);
+
+  filterProducts();
 });
+</script>
+
 </script>
 </body>
 </html>
