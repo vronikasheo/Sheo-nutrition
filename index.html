@@ -283,42 +283,12 @@ try {
 const selector = $("product");
 
 
-const categorySelector = $("category");
-
-// Завтраки — строки массива foods между
-// заголовком "ЗАВТРАКИ" и началом раздела "Вина".
-// Индексы считаются с нуля.
-const breakfastStart = 225 - 124 - 1;
-const breakfastEnd = 253 - 124 - 1;
-
-function fillProducts() {
-  const previous = selector.value;
-  const category = categorySelector.value;
-
-  selector.replaceChildren();
-
-  foods.forEach((food, index) => {
-    if (
-      category === "breakfast" &&
-      (index < breakfastStart || index > breakfastEnd)
-    ) return;
-
-    const option = document.createElement("option");
-    option.value = index;
-    option.textContent = food[0];
-    selector.appendChild(option);
-  });
-
-  if ([...selector.options].some(o => o.value === previous)) {
-    selector.value = previous;
-  }
-
-  updateUnit();
-}
-
-categorySelector.addEventListener("change", fillProducts);
-fillProducts();
-
+foods.forEach((food, index) => {
+  const option = document.createElement("option");
+  option.value = index;
+  option.textContent = food[0];
+  selector.appendChild(option);
+});
 
 function isPortion(index) {
   return foods[index] && foods[index][5] === "portion";
